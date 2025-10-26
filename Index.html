@@ -27,10 +27,16 @@
             <a-asset-item id="table" src="Table.glb"></a-asset-item>
             <a-asset-item id="ball" src="ball.glb"></a-asset-item>
         </a-assets>
-        <a-camera id="cam" wasd-controls="fly: true;" camera><a-entity cursor="fuse: true; fuseTimeout: 1500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter:0.03"
-            material="color: white; shader: flat"></a-entity>
-        <a-box ammo-body="type: kinematic" ammo-shape="type: box" scale="1 .5 1"></a-box>
-        </a-camera>
+        <a-entity scale="1 1 1" look-controls wasd-controls="acceleration: 25" id="cam" rotation="-7.792226013779201 -88.8084582452777 0" position="9.766448052789853 1.6 3.799176815660041"  camera>
+              <a-entity sound="src: music.mp3; autoplay: true; loop: true" cursor="fuse: false"  raycaster="objects: .draggable" geometry="primitive: circle; radius: 0.005" position="0 0 -0.5">
+            <a-animation
+            attribute="scale"
+            to="3 3 3"
+            begin="cursor-fusing"
+            fill="backwards"
+            ></a-animation>
+          </a-entity>
+    </a-entity>
         <a-entity ammo-body="type: static" ammo-shape="type: box" environment="preset: japan; groundColor: green; skyColor: orange;"></a-entity>
         <a-text value="Welcome to the Fall Day Scene!" color="orange" position="0 1.5 -3" align="center"></a-text>
         <a-entity gltf-model="#table" position="0 0 -3" scale="1 1 1"></a-entity>
@@ -55,7 +61,7 @@
         <!-- <a-cone color="red" position=" 1 1 1"></a-cone> -->
         <a-entity gltf-model="#floor" geometry="primitive: box; width: 1; height: 1; depth: 0.2;" position="1 0 1" scale="1 1 1"></a-entity>
         <a-entity sound="src: Jingle_of_Joy.wav; autoplay: true; loop: true;"></a-entity>
-        <a-gltf-model src="#ball" Grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
+        <a-gltf-model src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
         
         
     </a-scene>

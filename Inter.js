@@ -2,41 +2,42 @@
 console.log('Inter.js loaded');
 
 
-AFRAME.registerComponent('Grap', {
-    schema: {
-        
-    },
+AFRAME.registerComponent('grap', {
 
     init: function () {
         this.isDrag = false;
-        this.cam = document.querySelector('#cam');
-
-        this.addEventListener('click', () => {
+        this.camera = document.querySelector('#cam');
+        console.log("loaded grap    ");
+        this.el.addEventListener('click', () => {
             const b = this.el.body;
-            if (!b || !this.cam) return;
-
-            if (!this.isDrag) {
+            console.log('clicked');
+            if (!b || !this.camera) return;
+            
+            this.isDrag = !this.isDrag;
+            if (this.isDrag) {
                 b.setGravity(new Ammo.btVector3(0, 0, 0));
                 b.activate();
+                console.log('trying');
             } else {
                 b.setGravity(new Ammo.btVector3(0, -9.8, 0));
                 b.activate();
+                console.log('trying');
             }    
         });
     },
 
     tick: function (time, timeDelta) {
       // Do something on every scene tick or frame.
-        if (this.isDrag) return;
+        if (!this.isDrag) return;
 
-        const cam = this.cam;
+        const cam = this.camera;
         const bo = this.el.body;
         if (!bo || !cam) return;
         const campos = new THREE.Vector3();
         cam.object3D.getWorldPosition(campos);
 
-        const camdir = new THREE.Vector3();
-        cam.object3D.getworldQuaternion(camdir);
+        const camdir = new THREE.Quaternion();
+        cam.object3D.getWorldQuaternion(camdir);
 
         const graped_item = new THREE.Vector3();
         cam.object3D.getWorldDirection(graped_item);
