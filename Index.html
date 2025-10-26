@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fall-Day</title>
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.5.x/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.6.0/dist/aframe-extras.min.js"></script>
+
+</head>
+<body>
+    <a-scene >
+        <a-sky color="#E0E0E0"></a-sky>
+        <a-assets>
+            <a-asset-item>
+                <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+            </a-asset-item>
+            <a-asset-item id="pat" src="pat.glb"></a-asset-item>
+            <a-asset-item id="girl" src="girl.glb"></a-asset-item>
+            <a-asset-item id="Hornet" src="HORNET.glb"></a-asset-item>
+            <a-asset-item id="bird" src="BIRD.glb"></a-asset-item>
+            <a-asset-item id="hugi" src="scene.gltf"></a-asset-item>
+            <a-asset-item id="tree" src="trees and rocks.glb"></a-asset-item>
+            <a-asset-item id="floor" src="forest_floor_1k.gltf"></a-asset-item>
+        </a-assets>
+        <a-camera wasd-controls="fly: true;" camera><a-cursor></a-cursor></a-camera>
+        <a-entity environment="preset: goaland; groundColor: green; skyColor: orange;"></a-entity>
+        <a-text value="Welcome to the Fall Day Scene!" color="orange" position="0 1.5 -3" align="center"></a-text>
+        <a-box position="0 0.3 -3" color="brown" depth="1" height="1" width="1"></a-box>
+        <a-plane src="#groundTexture" rotation="-90 0 0" position="0 0.2 -4" width="4" height="4"></a-plane>
+        <a-entity animation-mixer gltf-model="#Hornet" position="3 0 -3" scale="2 2 2"></a-entity>
+        <a-entity animation-mixer gltf-model="#pat" position="-3 0 -3" scale="1 1 1"></a-entity>
+        <a-entity animation-mixer gltf-model="#girl" position="-5 0 -3" scale="1 1 1"></a-entity>
+        <a-entity animation-mixer gltf-model="#bird" position="-7 0.3 -3" scale="1 1 1"></a-entity>
+        <a-entity animation-mixer gltf-model="#hugi" position="-6 0 -6" scale="1 1 1"></a-entity>
+        <a-cone color="red" position="1 2 -2" scale="1 1 1"></a-cone>
+        <a-light type="directional" position="1 1 1" angle="0 50 0" intensity="2"></a-light>
+        <a-cylinder color="#FFF"></a-cylinder>
+        <a-entity gltf-model="#tree" position="-5 0 5" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity gltf-model="#tree" position="-8 0 9" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity gltf-model="#tree" position="9 0 15" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity gltf-model="#tree" position="-12 0 13" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity gltf-model="#tree" position="18 0 34" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity gltf-model="#tree" position="14 0 23" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity gltf-model="#tree" position="-16 0 28" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity gltf-model="#tree" position="-30 0 40" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity position="1 1 1" geometry="primitive: box; width: 1; height: 1; depth: 1;" material="color: red;"></a-entity>
+        <a-cone color="red" position=" 1 1 1"></a-cone>
+        <a-image src="https://www.google.com/imgres?q=star&imgurl=https%3A%2F%2Fimages.rawpixel.com%2Fimage_png_800%2FcHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTEwL3JtNDY3YmF0Y2gyLXN0YXItMDAxXzEucG5n.png&imgrefurl=https%3A%2F%2Fwww.rawpixel.com%2Fsearch%2Fstar%2520png&docid=9g52kI-GKvwk5M&tbnid=VAfL8qdGkAupuM&vet=12ahUKEwj_g_il6cGQAxV5dqQEHTBSCHYQM3oECCAQAA..i&w=800&h=800&hcb=2&ved=2ahUKEwj_g_il6cGQAxV5dqQEHTBSCHYQM3oECCAQAA"></a-image>
+        <a-text value="i love playing in my ass" position="0 2 0" rotation="0 90 0"></a-text>
+        <a-entity gltf-model="#floor" position="1 0 1" scale="1 1 1"></a-entity>
+    </a-scene>
+</body>
+</html>
