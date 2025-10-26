@@ -10,11 +10,12 @@
     <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.js"></script>
     <script src="Inter.js"></script>
+    <script src="Env.js"></script>
 
 
 </head>
 <body>
-    <a-scene stats obb-collider="showCollider: true" fog="type: exponential; color: #E0E0E0; density: 0;" real-world-meshing physics=" driver: ammo; debug: true; debugDrawMode: 1;">
+    <a-scene stats obb-collider="showCollider: true" fog="type: exponential; color: #E0E0E0; density: 0.05;" real-world-meshing physics=" driver: ammo; debug: true; debugDrawMode: 1;">
         <a-sky color="#E0E0E0"></a-sky>
         <a-assets>
             <a-asset-item id="pat" src="pat.glb"></a-asset-item>
@@ -26,9 +27,10 @@
             <a-asset-item id="floor" src="forest_floor_1k.gltf"></a-asset-item>
             <a-asset-item id="table" src="Table.glb"></a-asset-item>
             <a-asset-item id="ball" src="ball.glb"></a-asset-item>
+            <video autoplay loop="true"  src="istockphoto-1276654184-640_adpp_is.mp4" id="vid"></video>
         </a-assets>
-        <a-entity scale="1 1 1" look-controls wasd-controls="acceleration: 25" id="cam" rotation="-7.792226013779201 -88.8084582452777 0" position="9.766448052789853 1.6 3.799176815660041"  camera>
-              <a-entity sound="src: music.mp3; autoplay: true; loop: true" cursor="fuse: false"  raycaster="objects: .draggable" geometry="primitive: circle; radius: 0.005" position="0 0 -0.5">
+        <a-entity scale="1 1 1" look-controls wasd-controls="acceleration: 25" id="cam" position="0 1.8 0"   camera>
+              <a-entity sound="src: Jingle_of_Joy.wav; autoplay: true; loop: true" cursor="fuse: false"  raycaster="objects: .draggable" geometry="primitive: circle; radius: 0.005" position="0 0 -0.5">
             <a-animation
             attribute="scale"
             to="3 3 3"
@@ -37,14 +39,15 @@
             ></a-animation>
           </a-entity>
     </a-entity>
-        <a-entity ammo-body="type: static" ammo-shape="type: box" environment="preset: japan; groundColor: green; skyColor: orange;"></a-entity>
-        <a-text value="Welcome to the Fall Day Scene!" color="orange" position="0 1.5 -3" align="center"></a-text>
+        <a-entity id="env" ammo-body="type: static" ammo-shape="type: box" environment="preset: forest; groundColor: green; skyColor: orange;"></a-entity>
+        <a-text value="Welcome to the Fall Day Scene!" color="red" position="0 3.5 -3" align="center"></a-text>
+        <a-text id="current" value="Click To change the Environment! (Curr: Forest )" color="black" position="0 1.8 -3" align="center"></a-text>
         <a-entity gltf-model="#table" position="0 0 -3" scale="1 1 1"></a-entity>
         <a-entity animation-mixer ammo-body="type: dynamic; scaleAutoUpdate: false" ammo-shape="type: cylinder; offset: 0 1.4 0" gltf-model="#Hornet" position="3 0 -3" scale="2 2 2"></a-entity>
         <a-entity animation-mixer gltf-model="#pat" position="-2 0 -3" scale="1 1 1"></a-entity>
         <!-- <a-entity animation-mixer gltf-model="#girl" position="-5 0 -3" scale="1 1 1"></a-entity> -->
-        <a-entity animation-mixer gltf-model="#bird" ammo-body="type: dynamic; gravity: 0 0 0"" ammo-shape="type: hull" position="-7 2 -3" scale="1 1 1"></a-entity>
-        <a-box scale="5000 0.2 5000" ammo-body="type: static" position="0 -0.5 0" color="red" ammo-shape="type: box"></a-box>
+        <a-entity animation-mixer gltf-model="#bird" ammo-body="type: dynamic; gravity: 0 0 0" ammo-shape="type: hull" position="-7 2 -3" scale="1 1 1"></a-entity>
+        <a-box scale="5000 0.2 5000" ammo-body="type: static" position="0 -0.2 0" color="red" ammo-shape="type: box"></a-box>
         <!-- <a-entity animation-mixer gltf-model="#hugi" position="-6 0 -6" scale="1 1 1"></a-entity> -->
         <!-- <a-cone color="red" position="1 2 -2" scale="1 1 1"></a-cone> -->
         <a-light type="directional" position="1 1 1" angle="0 50 0" intensity="2"></a-light>
@@ -57,13 +60,27 @@
 <a-entity gltf-model="#tree" position="-18.04 0 -33.91" scale="0.5 0.5 0.5"></a-entity>
 <a-entity gltf-model="#tree" position="9.75 0 28.53" scale="0.5 0.5 0.5"></a-entity>
 <a-entity gltf-model="#tree" position="-38.71 0 -15.26" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="15.02 0 4.88" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="-25.66 0 22.09" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="8.91 0 -11.77" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="31.28 0 18.45" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="-5.30 0 -30.01" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="2.44 0 -4.61" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="-35.79 0 38.10" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="19.16 0 33.72" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="-4.55 0 10.19" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="29.00 0 -28.90" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="-14.99 0 -2.35" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="-39.50 0 -6.78" scale="0.5 0.5 0.5"></a-entity>
         <!-- <a-entity position="1 1 1" geometry="primitive: box; width: 1; height: 1; depth: 1;" material="color: red;"></a-entity> -->
         <!-- <a-cone color="red" position=" 1 1 1"></a-cone> -->
-        <a-entity gltf-model="#floor" geometry="primitive: box; width: 1; height: 1; depth: 0.2;" position="1 0 1" scale="1 1 1"></a-entity>
-        <a-entity sound="src: Jingle_of_Joy.wav; autoplay: true; loop: true;"></a-entity>
+         
         <a-gltf-model src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
-        
-        
+        <a-gltf-model src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
+        <a-gltf-model src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
+        <a-gltf-model src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
+        <a-video src="#vid" position="0 2.5 -3" scale="2 1 1" rotation="180 0 0"></a-video>
+        <a-box env class="draggable" color="red" position="0 1.2 -3" scale="0.5 0.5 0.5"></a-box>
     </a-scene>
 </body>
 </html>
