@@ -7,15 +7,16 @@
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.5.x/dist/aframe-environment-component.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.6.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.js"></script>
+    <script src="Inter.js"></script>
+
 
 </head>
 <body>
-    <a-scene >
+    <a-scene stats obb-collider="showCollider: true" fog="type: exponential; color: #E0E0E0; density: 0;" real-world-meshing physics=" driver: ammo; debug: true; debugDrawMode: 1;">
         <a-sky color="#E0E0E0"></a-sky>
         <a-assets>
-            <a-asset-item>
-                <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
-            </a-asset-item>
             <a-asset-item id="pat" src="pat.glb"></a-asset-item>
             <a-asset-item id="girl" src="girl.glb"></a-asset-item>
             <a-asset-item id="Hornet" src="HORNET.glb"></a-asset-item>
@@ -23,33 +24,39 @@
             <a-asset-item id="hugi" src="scene.gltf"></a-asset-item>
             <a-asset-item id="tree" src="trees and rocks.glb"></a-asset-item>
             <a-asset-item id="floor" src="forest_floor_1k.gltf"></a-asset-item>
+            <a-asset-item id="table" src="Table.glb"></a-asset-item>
+            <a-asset-item id="ball" src="ball.glb"></a-asset-item>
         </a-assets>
-        <a-camera wasd-controls="fly: true;" camera><a-cursor></a-cursor></a-camera>
-        <a-entity environment="preset: japan; groundColor: green; skyColor: orange;"></a-entity>
+        <a-camera id="cam" wasd-controls="fly: true;" camera><a-entity cursor="fuse: true; fuseTimeout: 1500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter:0.03"
+            material="color: white; shader: flat"></a-entity>
+        <a-box ammo-body="type: kinematic" ammo-shape="type: box" scale="1 .5 1"></a-box>
+        </a-camera>
+        <a-entity ammo-body="type: static" ammo-shape="type: box" environment="preset: japan; groundColor: green; skyColor: orange;"></a-entity>
         <a-text value="Welcome to the Fall Day Scene!" color="orange" position="0 1.5 -3" align="center"></a-text>
-        <a-box position="0 0.3 -3" color="brown" depth="1" height="1" width="1"></a-box>
-        <a-plane src="#groundTexture" rotation="-90 0 0" position="0 0.2 -4" width="4" height="4"></a-plane>
-        <a-entity animation-mixer gltf-model="#Hornet" position="3 0 -3" scale="2 2 2"></a-entity>
-        <a-entity animation-mixer gltf-model="#pat" position="-3 0 -3" scale="1 1 1"></a-entity>
-        <a-entity animation-mixer gltf-model="#girl" position="-5 0 -3" scale="1 1 1"></a-entity>
-        <a-entity animation-mixer gltf-model="#bird" position="-7 0.3 -3" scale="1 1 1"></a-entity>
-        <a-entity animation-mixer gltf-model="#hugi" position="-6 0 -6" scale="1 1 1"></a-entity>
-        <a-cone color="red" position="1 2 -2" scale="1 1 1"></a-cone>
+        <a-entity gltf-model="#table" position="0 0 -3" scale="1 1 1"></a-entity>
+        <a-entity animation-mixer ammo-body="type: dynamic; scaleAutoUpdate: false" ammo-shape="type: cylinder; offset: 0 1.4 0" gltf-model="#Hornet" position="3 0 -3" scale="2 2 2"></a-entity>
+        <a-entity animation-mixer gltf-model="#pat" position="-2 0 -3" scale="1 1 1"></a-entity>
+        <!-- <a-entity animation-mixer gltf-model="#girl" position="-5 0 -3" scale="1 1 1"></a-entity> -->
+        <a-entity animation-mixer gltf-model="#bird" ammo-body="type: dynamic; gravity: 0 0 0"" ammo-shape="type: hull" position="-7 2 -3" scale="1 1 1"></a-entity>
+        <a-box scale="5000 0.2 5000" ammo-body="type: static" position="0 -0.5 0" color="red" ammo-shape="type: box"></a-box>
+        <!-- <a-entity animation-mixer gltf-model="#hugi" position="-6 0 -6" scale="1 1 1"></a-entity> -->
+        <!-- <a-cone color="red" position="1 2 -2" scale="1 1 1"></a-cone> -->
         <a-light type="directional" position="1 1 1" angle="0 50 0" intensity="2"></a-light>
-        <a-cylinder color="#FFF"></a-cylinder>
-        <a-entity gltf-model="#tree" position="-5 0 5" scale="0.5 0.5 0.5"></a-entity>
-        <a-entity gltf-model="#tree" position="-8 0 9" scale="0.5 0.5 0.5"></a-entity>
-        <a-entity gltf-model="#tree" position="9 0 15" scale="0.5 0.5 0.5"></a-entity>
-        <a-entity gltf-model="#tree" position="-12 0 13" scale="0.5 0.5 0.5"></a-entity>
-        <a-entity gltf-model="#tree" position="18 0 34" scale="0.5 0.5 0.5"></a-entity>
-        <a-entity gltf-model="#tree" position="14 0 23" scale="0.5 0.5 0.5"></a-entity>
-        <a-entity gltf-model="#tree" position="-16 0 28" scale="0.5 0.5 0.5"></a-entity>
-        <a-entity gltf-model="#tree" position="-30 0 40" scale="0.5 0.5 0.5"></a-entity>
-        <a-entity position="1 1 1" geometry="primitive: box; width: 1; height: 1; depth: 1;" material="color: red;"></a-entity>
-        <a-cone color="red" position=" 1 1 1"></a-cone>
-        <a-image src="https://www.google.com/imgres?q=star&imgurl=https%3A%2F%2Fimages.rawpixel.com%2Fimage_png_800%2FcHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTEwL3JtNDY3YmF0Y2gyLXN0YXItMDAxXzEucG5n.png&imgrefurl=https%3A%2F%2Fwww.rawpixel.com%2Fsearch%2Fstar%2520png&docid=9g52kI-GKvwk5M&tbnid=VAfL8qdGkAupuM&vet=12ahUKEwj_g_il6cGQAxV5dqQEHTBSCHYQM3oECCAQAA..i&w=800&h=800&hcb=2&ved=2ahUKEwj_g_il6cGQAxV5dqQEHTBSCHYQM3oECCAQAA"></a-image>
-        <a-entity gltf-model="#floor" position="1 0 1" scale="1 1 1"></a-entity>
+        <!-- <a-cylinder color="#FFF"></a-cylinder> -->
+<a-entity gltf-model="#tree" position="37.89 0 -22.15" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="-10.51 0 14.33" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="-31.42 0 7.60" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="4.18 0 35.05" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="22.67 0 -1.94" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="-18.04 0 -33.91" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="9.75 0 28.53" scale="0.5 0.5 0.5"></a-entity>
+<a-entity gltf-model="#tree" position="-38.71 0 -15.26" scale="0.5 0.5 0.5"></a-entity>
+        <!-- <a-entity position="1 1 1" geometry="primitive: box; width: 1; height: 1; depth: 1;" material="color: red;"></a-entity> -->
+        <!-- <a-cone color="red" position=" 1 1 1"></a-cone> -->
+        <a-entity gltf-model="#floor" geometry="primitive: box; width: 1; height: 1; depth: 0.2;" position="1 0 1" scale="1 1 1"></a-entity>
         <a-entity sound="src: Jingle_of_Joy.wav; autoplay: true; loop: true;"></a-entity>
+        <a-gltf-model src="#ball" Grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
+        
         
     </a-scene>
 </body>
