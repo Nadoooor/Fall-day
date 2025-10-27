@@ -12,6 +12,8 @@ AFRAME.registerComponent('grap', {
             const b = this.el.body;
             console.log('clicked');
             if (!b || !this.camera) return;
+            const direction = new THREE.Vector3();
+        this.camera.object3D.getWorldDirection(direction);
             
             this.isDrag = !this.isDrag;
             if (this.isDrag) {
@@ -21,6 +23,8 @@ AFRAME.registerComponent('grap', {
             } else {
                 b.setGravity(new Ammo.btVector3(0, -9.8, 0));
                 b.activate();
+                const throwD= direction.multiplyScalar(-10);
+                b.setLinearVelocity(new Ammo.btVector3(throwD.x, throwD.y, throwD.z));
                 console.log('trying');
             }    
         });

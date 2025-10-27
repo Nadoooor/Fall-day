@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fall-Day</title>
+
+    <!-- aframe.io libraries -->
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.5.x/dist/aframe-environment-component.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.6.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.js"></script>
+    <!-- my own scrips -->
     <script src="Inter.js"></script>
     <script src="Env.js"></script>
+    <script src="Music.js"></script>
+    <script src="Basket.js"></script>
+    <script src="games.js"></script>
 
 
 </head>
 <body>
     <a-scene stats obb-collider="showCollider: true" fog="type: exponential; color: #E0E0E0; density: 0.05;" real-world-meshing physics=" driver: ammo; debug: true; debugDrawMode: 1;">
-        <a-sky color="#E0E0E0"></a-sky>
+        <a-sky color="orange"></a-sky>
+
         <a-assets>
             <a-asset-item id="pat" src="pat.glb"></a-asset-item>
             <a-asset-item id="girl" src="girl.glb"></a-asset-item>
@@ -29,8 +36,9 @@
             <a-asset-item id="ball" src="ball.glb"></a-asset-item>
             <video autoplay loop="true"  src="istockphoto-1276654184-640_adpp_is.mp4" id="vid"></video>
         </a-assets>
-        <a-entity scale="1 1 1" look-controls wasd-controls="acceleration: 25" id="cam" position="0 1.8 0"   camera>
-              <a-entity sound="src: Jingle_of_Joy.wav; autoplay: true; loop: true" cursor="fuse: false"  raycaster="objects: .draggable" geometry="primitive: circle; radius: 0.005" position="0 0 -0.5">
+        <!-- camera -->
+        <a-entity scale="1 1 1" look-controls wasd-controls="acceleration: 25" id="cam" position="0 2 0"   camera>
+              <a-entity id="curs" sound="src: Music/1.wav; autoplay: true; loop: true" cursor="fuse: false"  raycaster="objects: .draggable" geometry="primitive: circle; radius: 0.005" position="0 0 -0.5">
             <a-animation
             attribute="scale"
             to="3 3 3"
@@ -39,19 +47,25 @@
             ></a-animation>
           </a-entity>
     </a-entity>
+        <a-entity id="light" light="type: directional; color: #FFFFFF; intensity: 1; castShadow: true" position="0 10 0"></a-entity>
+
         <a-entity id="env" ammo-body="type: static" ammo-shape="type: box" environment="preset: forest; groundColor: green; skyColor: orange;"></a-entity>
+        <!-- texts -->
+        <a-text value="Env" color="black" position="0.4 1.2 -2.5" rotation="-90 0 0" align="center"></a-text>
         <a-text value="Welcome to the Fall Day Scene!" color="red" position="0 3.5 -3" align="center"></a-text>
-        <a-text id="current" value="Click To change the Environment! (Curr: Forest )" color="black" position="0 1.8 -3" align="center"></a-text>
+        <a-text id="current" value="Current Environment: Forest" color="black" position="0 1.8 -3" align="center"></a-text>
+        <a-text value="Music" color="black" position="-0.4 1.2 -2.5" rotation="-90 0 0" align="center"></a-text>
+        <a-text value="Env" color="black" position="0.4 1.2 -2.5" rotation="-90 0 0" align="center"></a-text>        
+        <a-text value="Score: 0" id="scoreText" color="black" position="6.7 4.5 -1" rotation="0 -90 0" align="center"></a-text>
+        <!-- models -->
         <a-entity gltf-model="#table" position="0 0 -3" scale="1 1 1"></a-entity>
         <a-entity animation-mixer ammo-body="type: dynamic; scaleAutoUpdate: false" ammo-shape="type: cylinder; offset: 0 1.4 0" gltf-model="#Hornet" position="3 0 -3" scale="2 2 2"></a-entity>
         <a-entity animation-mixer gltf-model="#pat" position="-2 0 -3" scale="1 1 1"></a-entity>
-        <!-- <a-entity animation-mixer gltf-model="#girl" position="-5 0 -3" scale="1 1 1"></a-entity> -->
-        <a-entity animation-mixer gltf-model="#bird" ammo-body="type: dynamic; gravity: 0 0 0" ammo-shape="type: hull" position="-7 2 -3" scale="1 1 1"></a-entity>
+        <a-entity animation-mixer grap class="grappable" gltf-model="#bird" ammo-body="type: dynamic; gravity: 0 0 0" ammo-shape="type: hull" position="-7 2 -3" scale="1 1 1"></a-entity>
+        <!-- floor -->
         <a-box scale="5000 0.2 5000" ammo-body="type: static" position="0 -0.2 0" color="red" ammo-shape="type: box"></a-box>
-        <!-- <a-entity animation-mixer gltf-model="#hugi" position="-6 0 -6" scale="1 1 1"></a-entity> -->
-        <!-- <a-cone color="red" position="1 2 -2" scale="1 1 1"></a-cone> -->
-        <a-light type="directional" position="1 1 1" angle="0 50 0" intensity="2"></a-light>
-        <!-- <a-cylinder color="#FFF"></a-cylinder> -->
+        
+    <!-- treeeeeeees :) -->
 <a-entity gltf-model="#tree" position="37.89 0 -22.15" scale="0.5 0.5 0.5"></a-entity>
 <a-entity gltf-model="#tree" position="-10.51 0 14.33" scale="0.5 0.5 0.5"></a-entity>
 <a-entity gltf-model="#tree" position="-31.42 0 7.60" scale="0.5 0.5 0.5"></a-entity>
@@ -72,15 +86,22 @@
 <a-entity gltf-model="#tree" position="29.00 0 -28.90" scale="0.5 0.5 0.5"></a-entity>
 <a-entity gltf-model="#tree" position="-14.99 0 -2.35" scale="0.5 0.5 0.5"></a-entity>
 <a-entity gltf-model="#tree" position="-39.50 0 -6.78" scale="0.5 0.5 0.5"></a-entity>
-        <!-- <a-entity position="1 1 1" geometry="primitive: box; width: 1; height: 1; depth: 1;" material="color: red;"></a-entity> -->
-        <!-- <a-cone color="red" position=" 1 1 1"></a-cone> -->
-         
-        <a-gltf-model src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
-        <a-gltf-model src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
-        <a-gltf-model src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
-        <a-gltf-model src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
+
+        <!-- basketballs -->
+        <a-gltf-model obb-collider src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
+        <a-gltf-model obb-collider src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
+        <a-gltf-model obb-collider src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
+        <a-gltf-model obb-collider src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
+        <!-- fall-video -->
         <a-video src="#vid" position="0 2.5 -3" scale="2 1 1" rotation="180 0 0"></a-video>
-        <a-box env class="draggable" color="red" position="0 1.2 -3" scale="0.5 0.5 0.5"></a-box>
+        <!-- buttons -->
+        <a-box env class="draggable" color="red" position="0.5 1.2  -3" scale="0.2 0.2 0.2"></a-box>
+        <a-box music class="draggable" color="blue" position="-0.5 1.2 -3" scale="0.2 0.2 0.2"></a-box>
+        <a-box ball class="draggable" color="green" position="0 1.2 -3" scale="0.2 0.2 0.2"></a-box>
+        <!-- basket -->
+        <a-box obb-collider ammo-body="type: static" ammo-shape="type: box" color="green" position="7 0 -1" scale="0.2 10 0.2"></a-box>
+        <a-box obb-collider ammo-body="type: static" ammo-shape="type: box" basket color="red" position="6.8 4.5 -1" scale="0.2 1.4 2"></a-box>
+        
     </a-scene>
 </body>
 </html>

@@ -15,6 +15,6 @@ AFRAME.registerComponent('env', {
             index = 0;
         }
         this.env.setAttribute('environment', 'preset', this.envs[index]);
-        this.text.setAttribute('value', 'Click To change the Environment!! (curr: ' + this.envs[index] + ')' );
+        this.text.setAttribute('value', 'Current Environment: ' + this.envs[index]);
     });
 }});
