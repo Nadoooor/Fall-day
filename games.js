@@ -19,3 +19,26 @@ AFRAME.registerComponent('ball', {
       });
     }
 });
+
+AFRAME.registerComponent('hidden', {
+    init: function () {
+        this.vid = document.querySelector('#vidd');
+        this.vid2 = document.querySelector('#vid2');
+        this.vids = ['#vid', '#vid2'];
+        this.index = 0;
+        this.el.addEventListener('click', () => {
+            this.index = this.index + 1;
+            if (this.index === 2){
+                this.index = 0;
+            }
+            this.vid.setAttribute('src', this.vids[this.index]);
+            this.vid.play();
+            if (this.index === 0){
+                this.vid2.pause();
+            } else {
+                this.vid2.play();
+            }
+            
+        });
+    }
+});

@@ -35,9 +35,12 @@
             <a-asset-item id="table" src="Table.glb"></a-asset-item>
             <a-asset-item id="ball" src="ball.glb"></a-asset-item>
             <video autoplay loop="true"  src="istockphoto-1276654184-640_adpp_is.mp4" id="vid"></video>
+            <video loop="true"  src="Rick.mp4" id="vid2"></video>
+
         </a-assets>
         <!-- camera -->
         <a-entity scale="1 1 1" look-controls wasd-controls="acceleration: 25" id="cam" position="0 2 0"   camera>
+            <a-box ammo-body="type: kinematic" ammo-shape="type: box"></a-box>
               <a-entity id="curs" sound="src: Music/1.wav; autoplay: true; loop: true" cursor="fuse: false"  raycaster="objects: .draggable" geometry="primitive: circle; radius: 0.005" position="0 0 -0.5">
             <a-animation
             attribute="scale"
@@ -52,11 +55,14 @@
         <a-entity id="env" ammo-body="type: static" ammo-shape="type: box" environment="preset: forest; groundColor: green; skyColor: orange;"></a-entity>
         <!-- texts -->
         <a-text value="Env" color="black" position="0.4 1.2 -2.5" rotation="-90 0 0" align="center"></a-text>
+        <a-text value="Ball" color="black" position="0 1.2 -2.2" rotation="-90 0 0" align="center"></a-text>
+        <a-text value="Click" color="black" position="0 1.2 -3.5" rotation="-45 0 0" align="center"></a-text>
         <a-text value="Welcome to the Fall Day Scene!" color="red" position="0 3.5 -3" align="center"></a-text>
         <a-text id="current" value="Current Environment: Forest" color="black" position="0 1.8 -3" align="center"></a-text>
         <a-text value="Music" color="black" position="-0.4 1.2 -2.5" rotation="-90 0 0" align="center"></a-text>
         <a-text value="Env" color="black" position="0.4 1.2 -2.5" rotation="-90 0 0" align="center"></a-text>        
         <a-text value="Score: 0" id="scoreText" color="black" position="6.7 4.5 -1" rotation="0 -90 0" align="center"></a-text>
+        <a-text value="Shoot here" id="scoreText" color="black" position="6.7 4.2 -1" rotation="0 -90 0" align="center"></a-text>
         <!-- models -->
         <a-entity gltf-model="#table" position="0 0 -3" scale="1 1 1"></a-entity>
         <a-entity animation-mixer ammo-body="type: dynamic; scaleAutoUpdate: false" ammo-shape="type: cylinder; offset: 0 1.4 0" gltf-model="#Hornet" position="3 0 -3" scale="2 2 2"></a-entity>
@@ -93,11 +99,12 @@
         <a-gltf-model obb-collider src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
         <a-gltf-model obb-collider src="#ball" class="draggable" grap position="0 1 0" scale="0.5 0.5 0.5" ammo-body="type: dynamic; gravity: 0 -9.8 0" ammo-shape="type: sphere"></a-gltf-model>
         <!-- fall-video -->
-        <a-video src="#vid" position="0 2.5 -3" scale="2 1 1" rotation="180 0 0"></a-video>
+        <a-video src="#vid" id="vidd" position="0 2.5 -3" scale="2 1 1" rotation="0 0 0"></a-video>
         <!-- buttons -->
         <a-box env class="draggable" color="red" position="0.5 1.2  -3" scale="0.2 0.2 0.2"></a-box>
         <a-box music class="draggable" color="blue" position="-0.5 1.2 -3" scale="0.2 0.2 0.2"></a-box>
         <a-box ball class="draggable" color="green" position="0 1.2 -3" scale="0.2 0.2 0.2"></a-box>
+        <a-box hidden class="draggable" color="yellow" position="0 0 -1.5" scale="0.2 0.2 0.2"></a-box>
         <!-- basket -->
         <a-box obb-collider ammo-body="type: static" ammo-shape="type: box" color="green" position="7 0 -1" scale="0.2 10 0.2"></a-box>
         <a-box obb-collider ammo-body="type: static" ammo-shape="type: box" basket color="red" position="6.8 4.5 -1" scale="0.2 1.4 2"></a-box>
